@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Songsmith</title>
+
+    @livewireStyles
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
+    <!-- <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -23,9 +25,13 @@
             @endauth
         </div>
         @endif
-    </div>
+    </div> -->
 
-    <p>Hello world.</p>
+    <h1>Song list:</h1>
+
+    @livewire('song-table')
+
+    @livewireScripts
 </body>
 
 </html>

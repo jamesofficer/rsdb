@@ -8,6 +8,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::transaction(function () {
+            $this->call(ArtistSeeder::class);
+            $this->call(PackSeeder::class);
             $this->call(SongSeeder::class);
         });
     }
