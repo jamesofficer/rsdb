@@ -7,10 +7,13 @@
 
     <title>Songsmith</title>
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet" defer>
+
     @livewireStyles
 </head>
 
-<body>
+<body class="bg-gray-400">
     <!-- <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
         <div class="top-right links">
@@ -27,9 +30,13 @@
         @endif
     </div> -->
 
-    <h1>Song list:</h1>
+    <div class="container">
+        <div class="mt-12">
+            <h1 class="font-sans text-3xl">Rocksmith DLC:</h1>
+        </div>
 
-    @livewire('song-table')
+        @livewire('song-table')
+    </div>
 
     @livewireScripts
 </body>
