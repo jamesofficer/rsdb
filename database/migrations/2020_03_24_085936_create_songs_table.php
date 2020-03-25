@@ -17,14 +17,14 @@ class CreateSongsTable extends Migration
             $table->id();
             $table->string('slug', 255)->unique();
             $table->string('title', 255);
-            $table->date('date_added')->nullable();
-            $table->string('year', 4);
             $table->string('steam_url')->nullable();
             $table->unsignedBigInteger('artist_id');
+            $table->unsignedBigInteger('album_id')->nullable();
             $table->unsignedBigInteger('pack_id')->nullable();
             $table->timestamps();
 
             $table->foreign('artist_id')->references('id')->on('artists');
+            $table->foreign('album_id')->references('id')->on('albums');
             $table->foreign('pack_id')->references('id')->on('packs');
         });
     }

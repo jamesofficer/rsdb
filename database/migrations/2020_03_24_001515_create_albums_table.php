@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePacksTable extends Migration
+class CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('packs', function (Blueprint $table) {
+        Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->string('slug', 255)->unique();
-            $table->string('name', 255);
-            $table->string('steam_url')->nullable();
+            $table->string('name', 255)->unique();
             $table->date('date')->nullable();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreatePacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packs');
+        Schema::dropIfExists('albums');
     }
 }
