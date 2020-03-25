@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 
 $factory->define(Album::class, function (Faker $faker) {
-    $albumName = ucwords($faker->words(mt_rand(1, 5), true));
+    $albumName = ucwords($faker->unique()->words(mt_rand(1, 5), true));
 
     return [
         'slug' => Str::slug($albumName),

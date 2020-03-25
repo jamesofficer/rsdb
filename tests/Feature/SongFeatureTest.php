@@ -12,13 +12,12 @@ class SongFeatureTest extends TestCase
 
     public function test_can_retrieve_a_list_of_songs()
     {
-        $songs = factory(Song::class, 1)->create();
+        $songs = factory(Song::class, 5)->create();
 
-        dump($songs->pack);
+        $response = $this->get('/api/songs')->assertOk();
 
-
-        $this->get('/api/songs')
-            ->assertJsonFragment($songs->toArray())
-            ->assertOk();
+        foreach ($songs as $song) {
+            $response->assertSee($song->title);
+        }
     }
 }
