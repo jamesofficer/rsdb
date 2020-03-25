@@ -41,7 +41,9 @@
                         @foreach ($songs as $song)
                         <tr>
                             <td class="songsmith-td font-bold">
-                                {{ $song->title }}
+                                <span wire:click="selectSong('{{ $song->id }}')" class="cursor-pointer hover:underline">
+                                    {{ $song->title }}
+                                </span>
                             </td>
 
                             <td class="songsmith-td">

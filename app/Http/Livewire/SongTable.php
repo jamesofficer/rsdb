@@ -7,15 +7,20 @@ use Livewire\Component;
 
 class SongTable extends Component
 {
-    public $query = '';
-    public $sortBy = 'title';
-    public $sortDirection = 'asc';
+    public string $query = '';
+    public string $sortBy = 'title';
+    public string $sortDirection = 'asc';
 
     public function render()
     {
         return view('livewire.song-table', [
             'songs' => $this->getFilteredSongs()
         ]);
+    }
+
+    public function selectSong(string $songId)
+    {
+        $this->emit('songSelected', $songId);
     }
 
     public function sortBy(string $column)
