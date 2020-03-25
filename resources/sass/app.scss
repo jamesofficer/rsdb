@@ -5,14 +5,28 @@
 .song-table {
     table-layout: fixed;
 
-    tr:nth-child(even) {
-        background: #edf2f7;
-    }
-
     td,
     th {
         width: 150px;
         white-space: normal;
         word-wrap: break-word;
     }
+
+    tbody {
+        tr:hover {
+            background: #bee3f8 !important;
+        }
+
+        tr:nth-child(even) {
+            background: #edf2f7;
+        }
+    }
+}
+
+.songsmith-th {
+    @apply px-4 py-3 border-b border-gray-200 text-left text-sm leading-4 font-bold text-gray-200 uppercase tracking-wider cursor-pointer;
+}
+
+.songsmith-td {
+    @apply px-4 py-2 text-gray-800 text-sm whitespace-no-wrap border-b border-gray-200;
 }

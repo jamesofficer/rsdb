@@ -33,9 +33,6 @@
     <div class="container">
         <div class="mt-12">
             <h1 class="font-bold text-gray-800 text-4xl">Rocksmith DLC Search</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate temporibus repudiandae explicabo rem
-                at officia aperiam iste distinctio. Adipisci error dolores molestiae delectus reprehenderit quibusdam
-                earum cumque, quaerat similique magni?</p>
         </div>
 
         @livewire('song-table')

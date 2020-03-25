@@ -8,6 +8,8 @@ use Livewire\Component;
 class SongTable extends Component
 {
     public $query = '';
+    public $sortBy = 'title';
+    public $sortDirection = 'asc';
 
     public function render()
     {
@@ -16,9 +18,26 @@ class SongTable extends Component
         ]);
     }
 
+    public function sortBy(string $column)
+    {
+        if ($column === $this->sortBy) {
+            $this->flipSortDirection();
+        }
+
+        $this->sortBy = $column;
+    }
+
+    private function flipSortDirection()
+    {
+        $this->sortDirection === 'asc' ? $this->sortDirection = 'desc' : $this->sortDirection = 'asc';
+    }
+
     private function getFilteredSongs()
     {
-        $songs = Song::all()->sortBy('title');
+        $songs = Song::all();
+
+        // Sort the songs by direction and title.
+        $this->sortDirection === 'asc' ? $songs = $songs->sortBy($this->sortBy) : $songs = $songs->sortByDesc($this->sortBy);
 
         if ($this->query) {
             $query = strtolower($this->query);

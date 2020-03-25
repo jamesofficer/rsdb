@@ -13946,15 +13946,48 @@ video {
   table-layout: fixed;
 }
 
-.song-table tr:nth-child(even) {
-  background: #edf2f7;
-}
-
 .song-table td,
 .song-table th {
   width: 150px;
   white-space: normal;
   word-wrap: break-word;
+}
+
+.song-table tbody tr:hover {
+  background: #bee3f8 !important;
+}
+
+.song-table tbody tr:nth-child(even) {
+  background: #edf2f7;
+}
+
+.songsmith-th {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom-width: 1px;
+  border-color: #edf2f7;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: 700;
+  color: #edf2f7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.songsmith-td {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #2d3748;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  border-bottom-width: 1px;
+  border-color: #edf2f7;
 }
 
 @media (min-width: 640px) {
