@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.song-table {
+    table-layout: fixed;
+
+    tr:nth-child(even) {
+        background: #edf2f7;
+    }
+
+    td,
+    th {
+        width: 150px;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+}

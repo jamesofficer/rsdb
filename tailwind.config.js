@@ -4,7 +4,7 @@ module.exports = {
             sans: ["Sen", "Inter", "Helvetica", "Arial", "sans-serif"]
         },
         container: {
-            padding: "1rem",
+            padding: "1.5rem",
             center: true
         },
         extend: {}

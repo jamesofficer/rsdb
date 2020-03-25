@@ -1,7 +1,8 @@
 <?php
 
-use App\Artist;
 use App\Pack;
+use App\Album;
+use App\Artist;
 use Illuminate\Database\Seeder;
 
 class SongSeeder extends Seeder
@@ -11,7 +12,7 @@ class SongSeeder extends Seeder
         // Create 100 songs.
         for ($i = 0; $i < 100; $i++) {
             $artist = Artist::inRandomOrder()->first();
-            $album = $artist->albums->random()->first();
+            $album = Album::where('artist_id', $artist->id)->inRandomOrder()->first();
 
             factory(App\Song::class)->create([
                 'artist_id' => $artist->id,
