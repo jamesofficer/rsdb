@@ -24,6 +24,10 @@
                             <th wire:click="sortBy('album_name')" class="songsmith-th hover:underline">
                                 Album
                             </th>
+
+                            <th wire:click="sortBy('average_difficulty')" class="songsmith-th hover:underline">
+                                Avg. Difficulty
+                            </th>
                         </tr>
                     </thead>
 
@@ -42,6 +46,10 @@
 
                             <td class="songsmith-td">
                                 {{ $song->album->name }}
+                            </td>
+
+                            <td class="songsmith-td">
+                                {{ $song->average_difficulty }}
                             </td>
                         </tr>
                         @endforeach

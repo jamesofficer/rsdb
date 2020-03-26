@@ -10,6 +10,7 @@ class HomeController extends Controller
     {
         return view('welcome', [
             'songs' => Song::with(['artist', 'album', 'pack'])->get(),
+            'song_count' => Song::count(),
         ]);
     }
 }

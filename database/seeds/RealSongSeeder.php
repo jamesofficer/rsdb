@@ -84,10 +84,10 @@ class RealSongSeeder extends Seeder
                 ]);
 
                 $arrangement = Arrangement::firstOrCreate([
-                    'name' => $parsed['arrangement']
+                    'name' => $this->getArrangementName($parsed['arrangement'])
                 ]);
 
-                $songArrangement = SongArrangement::firstOrCreate([
+                SongArrangement::firstOrCreate([
                     'song_id' => $song->id,
                     'arrangement_id' => $arrangement->id,
                     'tuning_id' => $tuning->id,
@@ -96,5 +96,28 @@ class RealSongSeeder extends Seeder
                 ]);
             }
         });
+    }
+
+    private function getArrangementName(string $arrangement)
+    {
+        $convertArrangement = [
+            'Lead' => 'Lead',
+            'Lead1' => 'Alt. Lead',
+            'Lead2' => 'Alt. Lead',
+            'Lead3' => 'Alt. Lead',
+            'Combo' => 'Combo (Lead & Rhythm)',
+            'Combo1' => 'Combo (Lead & Rhythm)',
+            'Combo2' => 'Combo (Lead & Rhythm)',
+            'Combo3' => 'Combo (Lead & Rhythm)',
+            'Combo4' => 'Combo (Lead & Rhythm)',
+            'Rhythm' => 'Rhythm',
+            'Rhythm1' => 'Alt. Rhythm',
+            'Rhythm2' => 'Alt. Rhythm',
+            'Rhythm3' => 'Alt. Rhythm',
+            'Bass' => 'Bass',
+            'Bass2' => 'Alt. Bass',
+        ];
+
+        return $convertArrangement[$arrangement];
     }
 }

@@ -1,7 +1,14 @@
 module.exports = {
     theme: {
         fontFamily: {
-            sans: ["Sen", "Inter", "Helvetica", "Arial", "sans-serif"]
+            sans: [
+                "Noto Sans",
+                "Sen",
+                "Inter",
+                "Helvetica",
+                "Arial",
+                "sans-serif"
+            ]
         },
         container: {
             padding: "1.5rem",

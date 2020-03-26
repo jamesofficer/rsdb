@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     protected $hidden = ['artist_id', 'album_id', 'pack_id'];
-    protected $with = ['artist', 'album', 'pack'];
-    protected $appends = ['artist_name', 'album_name', 'pack_name'];
+    protected $with = ['artist', 'album', 'pack', 'songArrangements'];
+    protected $appends = ['artist_name', 'album_name', 'pack_name', 'average_difficulty'];
 
     public function artist()
     {
@@ -25,6 +25,11 @@ class Song extends Model
         return $this->belongsTo(Pack::class);
     }
 
+    public function songArrangements()
+    {
+        return $this->hasMany(SongArrangement::class);
+    }
+
     public function getArtistNameAttribute()
     {
         return $this->artist->name;
@@ -38,5 +43,16 @@ class Song extends Model
     public function getPackNameAttribute()
     {
         return $this->pack->name ?? 'N/A';
+    }
+
+    public function getAverageDifficultyAttribute()
+    {
+        $difficulties = [];
+
+        foreach ($this->songArrangements as $songArrangement) {
+            $difficulties[] = $songArrangement->difficulty;
+        }
+
+        return round(array_sum($difficulties) / count($difficulties) * 100);
     }
 }

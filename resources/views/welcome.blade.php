@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet" defer>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" defer>
 
     @livewireStyles
 </head>
@@ -17,6 +18,7 @@
     <div class="container">
         <div class="mt-12">
             <h1 class="font-bold text-gray-800 text-4xl">Rocksmith DLC Search</h1>
+            <h3>Searching {{ $song_count }} songs.</h3>
         </div>
 
         @livewire('song-table')

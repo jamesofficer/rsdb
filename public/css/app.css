@@ -415,7 +415,7 @@ ul {
  */
 
 html {
-  font-family: Sen, Inter, Helvetica, Arial, sans-serif; /* 1 */
+  font-family: Noto Sans, Sen, Inter, Helvetica, Arial, sans-serif; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -3698,7 +3698,7 @@ video {
 }
 
 .font-sans {
-  font-family: Sen, Inter, Helvetica, Arial, sans-serif;
+  font-family: Noto Sans, Sen, Inter, Helvetica, Arial, sans-serif;
 }
 
 .font-hairline {
@@ -14012,6 +14012,16 @@ video {
   cursor: pointer;
 }
 
+input[type=button],
+button {
+  outline: none;
+}
+
+.modal-close-btn:focused,
+.modal-close-btn:active {
+  outline: none;
+}
+
 .song-modal {
   position: fixed;
   z-index: 1;
@@ -14024,7 +14034,7 @@ video {
 
 .song-modal .modal-content {
   width: 80%;
-  height: 80%;
+  height: auto;
   margin: 5% auto;
 }
 
@@ -17100,7 +17110,7 @@ video {
   }
 
   .sm\:font-sans {
-    font-family: Sen, Inter, Helvetica, Arial, sans-serif;
+    font-family: Noto Sans, Sen, Inter, Helvetica, Arial, sans-serif;
   }
 
   .sm\:font-hairline {
@@ -30417,7 +30427,7 @@ video {
   }
 
   .md\:font-sans {
-    font-family: Sen, Inter, Helvetica, Arial, sans-serif;
+    font-family: Noto Sans, Sen, Inter, Helvetica, Arial, sans-serif;
   }
 
   .md\:font-hairline {
@@ -43734,7 +43744,7 @@ video {
   }
 
   .lg\:font-sans {
-    font-family: Sen, Inter, Helvetica, Arial, sans-serif;
+    font-family: Noto Sans, Sen, Inter, Helvetica, Arial, sans-serif;
   }
 
   .lg\:font-hairline {
@@ -57051,7 +57061,7 @@ video {
   }
 
   .xl\:font-sans {
-    font-family: Sen, Inter, Helvetica, Arial, sans-serif;
+    font-family: Noto Sans, Sen, Inter, Helvetica, Arial, sans-serif;
   }
 
   .xl\:font-hairline {

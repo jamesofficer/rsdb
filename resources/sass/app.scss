@@ -47,6 +47,16 @@
     cursor: pointer;
 }
 
+input[type="button"],
+button {
+    outline: none;
+}
+
+.modal-close-btn:focused,
+.modal-close-btn:active {
+    outline: none;
+}
+
 .song-modal {
     position: fixed;
     z-index: 1;
@@ -58,7 +68,7 @@
 
     .modal-content {
         width: 80%;
-        height: 80%;
+        height: auto;
         margin: 5% auto;
     }
 }
