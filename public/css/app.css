@@ -13965,6 +13965,7 @@ video {
 
 .song-table tbody tr:hover {
   background: #bee3f8 !important;
+  cursor: pointer;
 }
 
 .song-table tbody tr:nth-child(even) {
