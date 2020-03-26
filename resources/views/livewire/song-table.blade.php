@@ -24,10 +24,6 @@
                             <th wire:click="sortBy('album_name')" class="songsmith-th hover:underline">
                                 Album
                             </th>
-
-                            <th wire:click="sortBy('pack_name')" class="songsmith-th hover:underline">
-                                Pack
-                            </th>
                         </tr>
                     </thead>
 
@@ -46,10 +42,6 @@
 
                             <td class="songsmith-td">
                                 {{ $song->album->name }}
-                            </td>
-
-                            <td class="songsmith-td">
-                                {{ $song->pack->name }}
                             </td>
                         </tr>
                         @endforeach

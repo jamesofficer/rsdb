@@ -37,6 +37,6 @@ class Song extends Model
 
     public function getPackNameAttribute()
     {
-        return $this->pack->name;
+        return $this->pack->name ?? 'N/A';
     }
 }

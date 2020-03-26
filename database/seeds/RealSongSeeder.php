@@ -44,17 +44,14 @@ class RealSongSeeder extends Seeder
                     'name' => $parsed['artist'],
                 ]);
 
-
                 // Some albums have the same name, make the slug unique
                 $albumSlug = Str::slug($parsed['album']);
                 $album = Album::where('name', $parsed['album'])->first();
 
                 if ($album && $album->artist->name !== $parsed['artist']) {
                     $albumSlug = Str::slug($parsed['artist'] . ' ' . $parsed['album']);
+                    dump('ALBUM: ' . $album->name . ' slug is now ' . $albumSlug);
                 }
-
-                // Albums with 'Greatest' or 'Greatest Hits' will conflict, so make them unique by adding the artist name.
-                $albumSlug = strstr(strtolower($parsed['album']), 'greatest') ? Str::slug($parsed['artist'] . ' ' . $parsed['album']) : Str::slug($parsed['album']);
 
                 $album = Album::firstOrCreate([
                     'slug' => $albumSlug,
@@ -69,6 +66,7 @@ class RealSongSeeder extends Seeder
 
                 if ($song && $song->artist->name !== $parsed['artist']) {
                     $songSlug = Str::slug($parsed['artist'] . ' ' . $parsed['song']);
+                    dump('SONG: ' . $song->title . ' slug is now ' . $songSlug);
                 }
 
                 $song = Song::firstOrCreate([

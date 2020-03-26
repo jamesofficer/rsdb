@@ -11,11 +11,6 @@ class SongModal extends Component
 
     public $song;
 
-    public function mount()
-    {
-        $this->song = Song::first();
-    }
-
     public function render()
     {
         return view('livewire.song-modal');
