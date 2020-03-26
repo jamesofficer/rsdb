@@ -20,7 +20,7 @@ class RealSongSeeder extends Seeder
      */
     public function run()
     {
-        $csvFile = file(storage_path('app/rs-song-list.csv'));
+        $csvFile = file(public_path('rs-song-list.csv'));
 
         DB::transaction(function () use ($csvFile) {
             foreach ($csvFile as $line) {
@@ -43,6 +43,15 @@ class RealSongSeeder extends Seeder
                     'slug' => Str::slug($parsed['artist']),
                     'name' => $parsed['artist'],
                 ]);
+
+
+                // Some albums have the same name, make the slug unique
+                $albumSlug = Str::slug($parsed['album']);
+                $album = Album::where('name', $parsed['album'])->first();
+
+                if ($album && $album->artist->name !== $parsed['artist']) {
+                    $albumSlug = Str::slug($parsed['artist'] . ' ' . $parsed['album']);
+                }
 
                 // Albums with 'Greatest' or 'Greatest Hits' will conflict, so make them unique by adding the artist name.
                 $albumSlug = strstr(strtolower($parsed['album']), 'greatest') ? Str::slug($parsed['artist'] . ' ' . $parsed['album']) : Str::slug($parsed['album']);
