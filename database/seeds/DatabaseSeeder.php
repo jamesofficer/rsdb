@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             $this->call(PackSeeder::class);
             $this->call(SongSeeder::class);
             $this->call(TuningsSeeder::class);
+            $this->call(PathsSeeder::class);
         });
     }
 }

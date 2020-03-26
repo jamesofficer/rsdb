@@ -10,7 +10,6 @@ class SongModal extends Component
     protected $listeners = ['songSelected' => 'setSong'];
 
     public $song;
-    public $visible = true;
 
     public function mount()
     {
@@ -25,12 +24,10 @@ class SongModal extends Component
     public function setSong($songId)
     {
         $this->song = Song::find($songId);
-        $this->visible = true;
     }
 
     public function closeModal()
     {
         $this->song = null;
-        $this->visible = false;
     }
 }

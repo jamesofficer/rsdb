@@ -1,5 +1,5 @@
 <div>
-    @if ($visible)
+    @if ($song)
     <button class="modal-close-btn text-white hover:text-blue-300" wire:click="closeModal">
         &times;
     </button>

@@ -18,6 +18,7 @@ class CreateSongsTable extends Migration
             $table->string('slug', 255)->unique();
             $table->string('title', 255);
             $table->string('steam_url')->nullable();
+            $table->unsignedInteger('length')->nullable();
             $table->unsignedBigInteger('artist_id');
             $table->unsignedBigInteger('album_id')->nullable();
             $table->unsignedBigInteger('pack_id')->nullable();
