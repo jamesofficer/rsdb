@@ -22,7 +22,7 @@ class RealSongSeeder extends Seeder
     {
         $csvFile = file(storage_path('app/rs-song-list.csv'));
 
-        DB::transaction(function () use ($csvFile, $currCount, $maxCount) {
+        DB::transaction(function () use ($csvFile) {
             foreach ($csvFile as $line) {
                 $parsedLine = str_getcsv($line);
 
@@ -44,15 +44,26 @@ class RealSongSeeder extends Seeder
                     'name' => $parsed['artist'],
                 ]);
 
+                // Albums with 'Greatest' or 'Greatest Hits' will conflict, so make them unique by adding the artist name.
+                $albumSlug = strstr(strtolower($parsed['album']), 'greatest') ? Str::slug($parsed['artist'] . ' ' . $parsed['album']) : Str::slug($parsed['album']);
+
                 $album = Album::firstOrCreate([
-                    'slug' => Str::slug($parsed['album']),
+                    'slug' => $albumSlug,
                     'name' => $parsed['album'],
                     'date' => Carbon::create($parsed['year'], 1, 1, 0, 0, 0),
                     'artist_id' => $artist->id,
                 ]);
 
+                // Some songs have the same name, make the slug unique
+                $songSlug = Str::slug($parsed['song']);
+                $song = Song::where('title', $parsed['song'])->first();
+
+                if ($song && $song->artist->name !== $parsed['artist']) {
+                    $songSlug = Str::slug($parsed['artist'] . ' ' . $parsed['song']);
+                }
+
                 $song = Song::firstOrCreate([
-                    'slug' => Str::slug($parsed['song']),
+                    'slug' => $songSlug,
                     'title' => $parsed['song'],
                     'steam_url' => null,
                     'length' => intval($parsed['length']),

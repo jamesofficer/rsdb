@@ -8,7 +8,7 @@
 
     {{-- Song Table --}}
     <div class="mb-20">
-        <div class="overflow-x-scroll overflow-y-hidden shadow-xl">
+        <div class="overflow-hidden shadow-xl">
             <div class="align-middle inline-block min-w-full shadow overflow-x-scroll sm:rounded-lg border border-gray-200">
                 <table class="min-w-full song-table">
                     <thead class="bg-blue-700 border-b-2 border-gray-300">
