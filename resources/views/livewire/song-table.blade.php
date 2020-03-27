@@ -2,7 +2,7 @@
     {{-- Filter Search Box --}}
     <div class="my-8">
         <h2 class="mt-8 font-bold text-blue-700 text-2xl">Filter Songs</h2>
-        <p class="mb-4">You can search by artist name, album title, pack name etc. Click on a row to see more information about a song.</p>
+        <p class="mb-4">You can search by artist name, album title, pack name etc.</p>
         <input wire:model="query" type="text" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-2xl text-gray-700 leading-tight focus:outline-none focus:bg-gray-100 focus:border-blue-600">
     </div>
 
