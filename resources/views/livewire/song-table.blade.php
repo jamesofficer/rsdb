@@ -7,59 +7,57 @@
     </div>
 
     {{-- Song Table --}}
-    <div class="mb-20">
-        <div class="overflow-hidden shadow-xl">
-            <div class="align-middle inline-block min-w-full shadow overflow-x-scroll sm:rounded-lg border border-gray-200">
-                <table class="min-w-full song-table">
-                    <thead class="bg-blue-700 border-b-2 border-gray-300">
-                        <tr>
-                            <th wire:click="sortBy('title')" class="songsmith-th hover:underline">
-                                Title
-                            </th>
-
-                            <th wire:click="sortBy('artist_name')" class="songsmith-th hover:underline">
-                                Artist
-                            </th>
-
-                            <th wire:click="sortBy('album_name')" class="songsmith-th hover:underline">
-                                Album
-                            </th>
-
-                            <th wire:click="sortBy('average_difficulty')" class="songsmith-th hover:underline">
-                                Avg. Difficulty
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="bg-gray-100">
-                        @foreach ($songs as $song)
-                        <tr wire:click="selectSong('{{ $song->id }}')">
-                            <td class="songsmith-td font-bold">
-                                <span class="cursor-pointer">
-                                    {{ $song->title }}
-                                </span>
-                            </td>
-
-                            <td class="songsmith-td">
-                                {{ $song->artist->name }}
-                            </td>
-
-                            <td class="songsmith-td">
-                                {{ $song->album->name }}
-                            </td>
-
-                            <td class="songsmith-td">
-                                {{ $song->average_difficulty }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                @if (count($songs) === 0)
-                <p>No songs found.</p>
-                @endif
-            </div>
-        </div>
+    <div wire:loading wire:target="query" class="w-full">
+        <x-loading-spinner />
     </div>
+
+    <table wire:loading.remove wire:target="query" class=" min-w-full song-table shadow-xl rounded-lg">
+        <thead class="bg-blue-700 border-b-2 border-gray-300 overflow-x-scroll">
+            <tr>
+                <th wire:click="sortBy('title')" class="songsmith-th hover:underline">
+                    Title
+                </th>
+
+                <th wire:click="sortBy('artist_name')" class="songsmith-th hover:underline">
+                    Artist
+                </th>
+
+                <th wire:click="sortBy('album_name')" class="songsmith-th hover:underline">
+                    Album
+                </th>
+
+                <th wire:click="sortBy('average_difficulty')" class="songsmith-th hover:underline">
+                    Avg. Difficulty
+                </th>
+            </tr>
+        </thead>
+
+        <tbody class="bg-gray-100">
+            @foreach ($songs as $song)
+            <tr wire:click="selectSong('{{ $song->id }}')">
+                <td class="songsmith-td font-bold">
+                    <span class="cursor-pointer">
+                        {{ $song->title }}
+                    </span>
+                </td>
+
+                <td class="songsmith-td">
+                    {{ $song->artist->name }}
+                </td>
+
+                <td class="songsmith-td">
+                    {{ $song->album->name }}
+                </td>
+
+                <td class="songsmith-td">
+                    {{ $song->average_difficulty }}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    @if (count($songs) === 0)
+    <p>No songs found.</p>
+    @endif
 </div>

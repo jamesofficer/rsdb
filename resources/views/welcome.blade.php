@@ -8,8 +8,7 @@
     <title>Songsmith</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet" defer>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" defer>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" defer>
 
     @livewireStyles
 </head>
