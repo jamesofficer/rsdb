@@ -9,11 +9,12 @@
 }
 
 .song-table {
-    table-layout: fixed;
+    // border-collapse: collapse;
+    // table-layout: auto;
+    // border-radius: 50px;
 
     td,
     th {
-        width: 150px;
         white-space: normal;
         word-wrap: break-word;
     }

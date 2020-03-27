@@ -27,6 +27,10 @@
           animation: sk-chase-dot-before 2s infinite ease-in-out both;
 }
 
+.white-dots > div > .sk-chase .sk-chase-dot:before {
+  background-color: white !important;
+}
+
 .sk-chase-dot:nth-child(1) {
   -webkit-animation-delay: -1.1s;
           animation-delay: -1.1s;
@@ -14085,13 +14089,8 @@ video {
   border-radius: 0.25rem;
 }
 
-.song-table {
-  table-layout: fixed;
-}
-
 .song-table td,
 .song-table th {
-  width: 150px;
   white-space: normal;
   word-wrap: break-word;
 }
