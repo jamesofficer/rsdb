@@ -16,8 +16,14 @@
                 @foreach ($song->songArrangements->reverse() as $songArrangement)
                 <div class="mr-16">
                     <h3 class="font-bold text-xl text-blue-700">{{ $songArrangement->arrangement->name }}</h3>
-                    <p class="text-lg"><span class="font-bold">Tuning:</span> {{ $songArrangement->tuning->name }}</p>
-                    <p class="mb-4 text-lg"><span class="font-bold">Difficulty:</span> {{ $songArrangement->formatted_difficulty }} / 100</p>
+                    <p class="text-lg">
+                        <span class="font-bold text-gray-700">Tuning:</span>
+                        {{ $songArrangement->tuning->name }}
+                    </p>
+                    <p class="mb-4 text-lg">
+                        <span class="font-bold text-gray-700">Difficulty:</span>
+                        {{ $songArrangement->formatted_difficulty }} / 100
+                    </p>
                 </div>
                 @endforeach
             </div>

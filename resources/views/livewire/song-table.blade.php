@@ -12,9 +12,9 @@
     </div>
 
     {{-- Song Table --}}
-    <div class="mb-32">
-        <table wire:loading.remove wire:target="query" class="min-w-full song-table shadow-lg">
-            <thead class="bg-blue-700 border-b-2 border-gray-300 overflow-x-scroll rounded-full">
+    <div class="mb-32 align-middle inline-block min-w-full shadow-lg overflow-hidden sm:rounded-lg">
+        <table wire:loading.remove wire:target="query" class="min-w-full song-table">
+            <thead class="bg-blue-700 border-b-2 border-gray-300 overflow-x-scroll">
                 <tr>
                     <th wire:click="sortBy('title')" class="songsmith-th hover:underline">
                         Title
@@ -60,8 +60,8 @@
         </table>
 
         @if (count($songs) === 0)
-        <div class="flex justify-center">
-            <p class="py-8 text-xl text-gray-600">No songs found.</p>
+        <div wire:loading.remove class="flex justify-center bg-white">
+            <p class="py-8 text-xl text-gray-600">No songs found :(</p>
         </div>
         @endif
     </div>
