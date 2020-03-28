@@ -1,4 +1,5 @@
 TODO:
+- Add album_artist table and fix up seeder.
 - Add packs data.
 - Add album art.
 - Add Spotify links to each song.
@@ -7,6 +8,7 @@ TODO:
 - Add 
 
 COMPLETED:
+- Add search string column.
 - Improve table layout on mobile.
 - Close modal by clicking on the background.
 - Add year to Song modal.

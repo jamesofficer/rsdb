@@ -8,7 +8,7 @@ class Song extends Model
 {
     protected $hidden = ['artist_id', 'album_id', 'pack_id'];
     protected $with = ['artist', 'album', 'pack', 'songArrangements'];
-    protected $appends = ['artist_name', 'album_name', 'pack_name', 'average_difficulty'];
+    protected $appends = ['artist_name', 'album_name', 'pack_name', 'search_string', 'average_difficulty'];
 
     public function artist()
     {
@@ -30,6 +30,11 @@ class Song extends Model
         return $this->hasMany(SongArrangement::class);
     }
 
+    public function getSearchStringAttribute()
+    {
+        return $this->title . ' - ' . $this->artist_name . ' - ' . $this->album_name . ' - ' . $this->pack_name;
+    }
+
     public function getArtistNameAttribute()
     {
         return $this->artist->name;
@@ -42,7 +47,7 @@ class Song extends Model
 
     public function getPackNameAttribute()
     {
-        return $this->pack->name ?? 'N/A';
+        return $this->pack->name ?? '';
     }
 
     public function getAverageDifficultyAttribute()

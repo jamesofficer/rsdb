@@ -22,13 +22,22 @@ class RealSongSeeder extends Seeder
     {
         $csvFile = file(public_path('csv/rs-song-list.csv'));
 
-        DB::transaction(function () use ($csvFile) {
+        $max = 10000;
+        $curr = 0;
+
+        DB::transaction(function () use ($csvFile, $max, $curr) {
             foreach ($csvFile as $line) {
+                if ($curr > $max) {
+                    break;
+                } else {
+                    $curr++;
+                }
+
                 $parsedLine = str_getcsv($line);
 
                 // REFERENCE:
                 $parsed = [
-                    'artist' => $parsedLine[0],
+                    'artist' => ucwords(str_replace(' and ', ' & ', $parsedLine[0])),
                     'song' => $parsedLine[1],
                     'album' => $parsedLine[2],
                     'arrangement' => $parsedLine[3],
@@ -36,7 +45,7 @@ class RealSongSeeder extends Seeder
                     'tuning' => $parsedLine[5],
                     'difficulty' => $parsedLine[6],
                     'length' => $parsedLine[7],
-                    'capo' => $parsedLine[8],
+                    'capo' => $parsedLine[8] ?? 0,
                 ];
 
                 $artist = Artist::firstOrCreate([
@@ -45,18 +54,21 @@ class RealSongSeeder extends Seeder
                 ]);
 
                 // Some albums have the same name, make the slug unique
-                $albumSlug = Str::slug($parsed['album']);
-                $album = Album::where('name', $parsed['album'])->first();
+                $albumSlug = $this->getAlbumSlug($parsed);
 
-                if ($album && $album->artist->name !== $parsed['artist']) {
+                if (strstr(strtolower($parsed['album']), 'greatest')) {
                     $albumSlug = Str::slug($parsed['artist'] . ' ' . $parsed['album']);
-                    dump('ALBUM: ' . $album->name . ' slug is now ' . $albumSlug);
+                    dump('ALBUM SLUG IS NOW ' . $albumSlug);
                 }
 
                 $album = Album::firstOrCreate([
                     'slug' => $albumSlug,
                     'name' => $parsed['album'],
-                    'date' => Carbon::create($parsed['year'], 1, 1, 0, 0, 0),
+                    'year' => $parsed['year'],
+                ]);
+
+                DB::table('album_artist')->insertOrIgnore([
+                    'album_id' => $album->id,
                     'artist_id' => $artist->id,
                 ]);
 
@@ -96,6 +108,27 @@ class RealSongSeeder extends Seeder
                 ]);
             }
         });
+    }
+
+    private function getAlbumSlug(array $parsed)
+    {
+        $albumSlug = Str::slug($parsed['album']);
+        $albumTitle = strtolower($parsed['album']);
+
+
+
+        if (
+            strstr($albumTitle, 'hits') ||
+            strstr($albumTitle, 'indestructible') ||
+            strstr($albumTitle, 'awake') ||
+            strstr($albumTitle, 'bad reputation') ||
+            strstr($albumTitle, 'blue')
+        ) {
+            $albumSlug = Str::slug($parsed['artist'] . ' ' . $parsed['album']);
+            dump('ALBUM SLUG IS NOW ' . $albumSlug);
+        }
+
+        return $albumSlug;
     }
 
     private function getArrangementName(string $arrangement)

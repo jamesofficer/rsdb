@@ -12,7 +12,7 @@ class Album extends Model
 
     public function artist()
     {
-        return $this->belongsTo(Artist::class);
+        return $this->belongsToMany(Artist::class);
     }
 
     public function getYearAttribute()

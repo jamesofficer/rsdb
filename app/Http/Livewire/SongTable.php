@@ -48,10 +48,7 @@ class SongTable extends Component
             $query = strtolower($this->query);
 
             $filteredSongs =  $songs->filter(function ($song) use ($query) {
-                return strstr(strtolower($song->title), $query) ||
-                    strstr(strtolower($song->artist_name), $query) ||
-                    strstr(strtolower($song->album_name), $query) ||
-                    strstr(strtolower($song->pack_name), $query);
+                return strstr(strtolower($song->search_string), $query);
             });
 
             return $filteredSongs;
