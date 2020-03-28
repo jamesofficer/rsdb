@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SongArrangement extends Model
 {
     protected $with = ['arrangement', 'tuning'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function arrangement()
     {

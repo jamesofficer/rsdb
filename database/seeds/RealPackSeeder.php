@@ -15,7 +15,7 @@ class RealPackSeeder extends Seeder
         $csvFile = file(public_path('csv/packs-seed-data.csv'));
 
         $curr = 0;
-        $max = 400;
+        $max = 1000;
 
         DB::transaction(function () use ($csvFile, $curr, $max) {
             foreach ($csvFile as $line) {

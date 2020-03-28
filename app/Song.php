@@ -32,7 +32,9 @@ class Song extends Model
 
     public function getSearchStringAttribute()
     {
-        return $this->title . ' - ' . $this->artist_name . ' - ' . $this->album_name . ' - ' . $this->pack_name;
+        $string = $this->title . ' ' . $this->artist_name . ' ' . $this->album_name . ' ' . $this->pack_name;
+
+        return strtolower(preg_replace('/[^a-z0-9]+/i', ' ', $string));
     }
 
     public function getArtistNameAttribute()
