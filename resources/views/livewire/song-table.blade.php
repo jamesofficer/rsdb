@@ -12,64 +12,66 @@
     </div>
 
     {{-- Song Table --}}
-    <div class="mb-32 align-middle inline-block min-w-full shadow-lg overflow-hidden sm:rounded-lg">
-        <table wire:loading.remove wire:target="query" class="min-w-full song-table">
-            <thead class="bg-blue-700 border-b-2 border-gray-300 overflow-x-scroll">
-                <tr>
-                    <th wire:click="sortBy('title')" class="songsmith-th hover:underline">
-                        Title
-                    </th>
+    <div class="overflow-x-scroll rounded-lg">
+        <div class="mb-32 align-middle inline-block min-w-full shadow-lg">
+            <table wire:loading.remove wire:target="query" class="min-w-full song-table">
+                <thead class="bg-blue-700 border-b-2 border-gray-300">
+                    <tr>
+                        <th wire:click="sortBy('title')" class="songsmith-th hover:underline">
+                            Title
+                        </th>
 
-                    <th wire:click="sortBy('artist_name')" class="songsmith-th hover:underline">
-                        Artist
-                    </th>
+                        <th wire:click="sortBy('artist_name')" class="songsmith-th hover:underline">
+                            Artist
+                        </th>
 
-                    <th wire:click="sortBy('album_name')" class="songsmith-th hover:underline">
-                        Album
-                    </th>
+                        <th wire:click="sortBy('album_name')" class="songsmith-th hover:underline">
+                            Album
+                        </th>
 
-                    <th wire:click="sortBy('average_difficulty')" class="songsmith-th hover:underline">
-                        Avg. Difficulty
-                    </th>
-                </tr>
-            </thead>
+                        <th wire:click="sortBy('average_difficulty')" class="songsmith-th hover:underline">
+                            Avg. Difficulty
+                        </th>
+                    </tr>
+                </thead>
 
-            <tbody class="bg-gray-100">
-                @foreach ($songs as $song)
-                <tr wire:click="selectSong('{{ $song->id }}')">
-                    <td class="songsmith-td font-bold">
-                        <span class="cursor-pointer">
-                            {{ $song->title }}
-                        </span>
-                    </td>
+                <tbody class="bg-gray-100">
+                    @foreach ($songs as $song)
+                    <tr wire:click="selectSong('{{ $song->id }}')">
+                        <td class="songsmith-td font-bold">
+                            <span class="cursor-pointer">
+                                {{ $song->title }}
+                            </span>
+                        </td>
 
-                    <td class="songsmith-td">
-                        {{ $song->artist->name }}
-                    </td>
+                        <td class="songsmith-td">
+                            {{ $song->artist->name }}
+                        </td>
 
-                    <td class="songsmith-td">
-                        {{ $song->album->name }}
-                    </td>
+                        <td class="songsmith-td">
+                            {{ $song->album->name }}
+                        </td>
 
-                    <td class="songsmith-td">
-                        {{ $song->average_difficulty }}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        <td class="songsmith-td">
+                            {{ $song->average_difficulty }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-        @if (count($songs) === 0)
-        <div wire:loading.remove class="flex justify-center bg-white">
-            <p class="py-8 text-xl text-gray-600">No songs found :(</p>
+            @if (count($songs) === 0)
+            <div wire:loading.remove class="flex justify-center bg-white">
+                <p class="py-8 text-xl text-gray-600">No songs found :(</p>
+            </div>
+            @endif
         </div>
-        @endif
-    </div>
 
-    {{-- Loading Spinner when selecting a song. --}}
-    <div wire:loading wire:target="selectSong">
-        <div class="song-modal white-dots flex items-center justify-center">
-            <x-loading-spinner />
+        {{-- Loading Spinner when selecting a song. --}}
+        <div wire:loading wire:target="selectSong">
+            <div class="song-modal white-dots flex items-center justify-center">
+                <x-loading-spinner />
+            </div>
         </div>
     </div>
 </div>

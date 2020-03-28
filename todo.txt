@@ -1,0 +1,12 @@
+TODO:
+- Add packs data.
+- Add album art.
+- Add Spotify links to each song.
+- Add Steam links for each pack and song.
+- Add user song difficulty ratings.
+- Add 
+
+COMPLETED:
+- Improve table layout on mobile.
+- Close modal by clicking on the background.
+- Add year to Song modal.

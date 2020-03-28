@@ -34,12 +34,22 @@
             <h3 class="text-lg">Searching {{ $song_count }} songs (and counting).</h3>
         </div>
 
+        <h4 class="mt-4 font-bold text-lg text-blue-700">Tips</h4>
+        <ul class="list-disc">
+            <li class="ml-4">Click on a song to view more information about it.</li>
+            <li class="ml-4">Clicking on a column heading will sort it by that column ascending or descending.</li>
+        </ul>
+
         @livewire('song-table')
     </div>
 
     @livewire('song-modal')
 
     @livewireScripts
+
+    <script>
+        window.livewire.on('closeModal', () => window.livewire.emit('songSelected', null));
+    </script>
 </body>
 
 </html>

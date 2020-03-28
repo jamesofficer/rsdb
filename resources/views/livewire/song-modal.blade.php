@@ -1,15 +1,19 @@
-<div>
+<div onclick="closeModal(event)" id="modal-wrapper">
     @if ($song)
-    <span class="modal-close-btn text-white hover:text-blue-300 ml-12" wire:click="closeModal">
-        &times;
-    </span>
-
     <div class="song-modal">
         <div class="modal-content bg-gray-100 rounded-lg p-8">
             <p class="text-gray-600 text-xs uppercase">Song</p>
-            <h1 class="text-3xl font-bold text-blue-700">{{ $song->title }}</h1>
+            
+            <div class="flex flex-col lg:flex-row justify-between">
+                <h1 class="text-3xl font-bold text-blue-700">{{ $song->title }}</h1>
+                <h4 class="hidden lg:block text-2xl text-gray-700">{{ $song->album->year }}</h4>
+            </div>
+
             <h3 class="text-2xl text-gray-700">{{ $song->artist->name }}</h3>
-            <h4 class="mb-4 pb-4 text-xl text-gray-600 border-b-2 border-blue-700">{{ $song->album->name }}</h4>
+            <h4 class="mb-4 pb-4 text-xl text-gray-600 border-b-2 border-blue-700">
+                {{ $song->album->name }}
+                <span class="inline lg:hidden">({{ $song->album->year }})</span>
+            </h4>
 
             <p class="mt-6 mb-4 text-gray-600 text-sm uppercase">Arrangements</p>
             <div class="flex flex-col lg:flex-row">
@@ -32,4 +36,13 @@
         </div>
     </div>
     @endif
+
 </div>
+
+<script>
+    function closeModal(event) {
+        if (event.srcElement.className === 'song-modal') {
+            window.livewire.emit('closeModal');
+        }
+    }
+</script>
