@@ -20,7 +20,7 @@ class RealSongSeeder extends Seeder
      */
     public function run()
     {
-        $csvFile = file(public_path('rs-song-list.csv'));
+        $csvFile = file(public_path('csv/rs-song-list.csv'));
 
         DB::transaction(function () use ($csvFile) {
             foreach ($csvFile as $line) {

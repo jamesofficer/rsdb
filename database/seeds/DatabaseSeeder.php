@@ -8,11 +8,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::transaction(function () {
-            $this->call(ArtistSeeder::class);
-            $this->call(PackSeeder::class);
-            $this->call(SongSeeder::class);
-            $this->call(TuningsSeeder::class);
-            $this->call(PathsSeeder::class);
+            $this->call(RealSongSeeder::class);
+
+            // $this->call(ArtistSeeder::class);
+            // $this->call(PackSeeder::class);
+            // $this->call(SongSeeder::class);
+            // $this->call(TuningsSeeder::class);
         });
     }
 }

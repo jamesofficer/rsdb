@@ -12,9 +12,9 @@
     </div>
 
     {{-- Song Table --}}
-    <div class="overflow-x-scroll rounded-lg">
-        <div class="mb-32 align-middle inline-block min-w-full shadow-lg">
-            <table wire:loading.remove wire:target="query" class="min-w-full song-table">
+    <div class="mb-32 overflow-x-scroll lg:overflow-x-hidden rounded-lg" wire:loading.remove wire:target="query">
+        <div class="align-middle inline-block min-w-full shadow-lg">
+            <table class="min-w-full song-table">
                 <thead class="bg-blue-700 border-b-2 border-gray-300">
                     <tr>
                         <th wire:click="sortBy('title')" class="songsmith-th hover:underline">
