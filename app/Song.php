@@ -32,7 +32,7 @@ class Song extends Model
 
     public function getSearchStringAttribute()
     {
-        $string = $this->title . ' ' . $this->artist_name . ' ' . $this->album_name;
+        $string = $this->title . ' ' . $this->artist_name . ' ' . $this->album_name . ' ' . $this->pack_name;
 
         return strtolower(preg_replace('/[^a-z0-9]+/i', ' ', $string));
     }
@@ -45,6 +45,23 @@ class Song extends Model
     public function getAlbumNameAttribute()
     {
         return $this->album->name;
+    }
+
+    public function getPackNameAttribute()
+    {
+        $names = '';
+
+        foreach ($this->packs as $pack) {
+            $names .= $pack->name;
+
+            if (count($this->packs) > 1) {
+                $names .= " ({$pack->region})";
+            }
+
+            $names .= '<br />';
+        }
+
+        return $names;
     }
 
     public function getAverageDifficultyAttribute()

@@ -30,7 +30,7 @@
                             Album
                         </th>
 
-                        <th class="songsmith-th hover:underline">
+                        <th wire:click="sortBy('pack_name')" class="songsmith-th hover:underline">
                             Packs
                         </th>
 
@@ -58,9 +58,7 @@
                         </td>
 
                         <td class="songsmith-td">
-                            @foreach ($song->packs as $pack)
-                            {{ $pack->name }} @if (count($song->packs) > 1) ({{ $pack->region }}) @endif<br>
-                            @endforeach
+                            {!! $song->pack_name !!}
                         </td>
 
                         <td class="songsmith-td">
