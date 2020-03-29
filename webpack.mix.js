@@ -8,5 +8,5 @@ mix.sass("resources/sass/app.scss", "public/css")
         postCss: [tailwindcss("./tailwind.config.js")]
     })
     .purgeCss({
-        enabled: false
+        enabled: true
     });
