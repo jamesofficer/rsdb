@@ -53,16 +53,8 @@ class RealSongSeeder extends Seeder
                     'name' => $parsed['artist'],
                 ]);
 
-                // Some albums have the same name, make the slug unique
-                $albumSlug = $this->getAlbumSlug($parsed);
-
-                if (strstr(strtolower($parsed['album']), 'greatest')) {
-                    $albumSlug = Str::slug($parsed['artist'] . ' ' . $parsed['album']);
-                    dump('ALBUM SLUG IS NOW ' . $albumSlug);
-                }
-
                 $album = Album::firstOrCreate([
-                    'slug' => $albumSlug,
+                    'slug' => $this->getAlbumSlug($parsed),
                     'name' => $parsed['album'],
                     'year' => $parsed['year'],
                 ]);
@@ -72,17 +64,8 @@ class RealSongSeeder extends Seeder
                     'artist_id' => $artist->id,
                 ]);
 
-                // Some songs have the same name, make the slug unique
-                $songSlug = Str::slug($parsed['song']);
-                $song = Song::where('title', $parsed['song'])->first();
-
-                if ($song && $song->artist->name !== $parsed['artist']) {
-                    $songSlug = Str::slug($parsed['artist'] . ' ' . $parsed['song']);
-                    dump('SONG: ' . $song->title . ' slug is now ' . $songSlug);
-                }
-
                 $song = Song::firstOrCreate([
-                    'slug' => $songSlug,
+                    'slug' => $this->getSongSlug($parsed),
                     'title' => $parsed['song'],
                     'steam_url' => null,
                     'length' => intval($parsed['length']),
@@ -110,12 +93,23 @@ class RealSongSeeder extends Seeder
         });
     }
 
-    private function getAlbumSlug(array $parsed)
+    private function getSongSlug(array $parsed): string
+    {
+        $songSlug = Str::slug($parsed['song']);
+        $song = Song::where('slug', $songSlug)->first();
+
+        if ($song && $song->artist->name !== $parsed['artist']) {
+            $songSlug = Str::slug($parsed['artist'] . ' ' . $parsed['song']);
+            dump('SONG: ' . $song->title . ' slug is now ' . $songSlug);
+        }
+
+        return $songSlug;
+    }
+
+    private function getAlbumSlug(array $parsed): string
     {
         $albumSlug = Str::slug($parsed['album']);
         $albumTitle = strtolower($parsed['album']);
-
-
 
         if (
             strstr($albumTitle, 'hits') ||

@@ -38,6 +38,13 @@
         <ul class="list-disc">
             <li class="ml-4">Click on a song to view more information about it.</li>
             <li class="ml-4">Clicking on a column heading will sort it by that column ascending or descending.</li>
+            <li class="ml-4">
+                Confused about certain note types?
+                <a href="http://static2.cdn.ubi.com/ncsa/rocksmith/website/guides/Notehead-tail%20guide.pdf"
+                    class="text-blue-700 hover:underline" target="_blank">
+                    Check out the note guide here.
+                </a>
+            </li>
         </ul>
 
         @livewire('song-table')

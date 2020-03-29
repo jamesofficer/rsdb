@@ -14,18 +14,8 @@ class RealPackSeeder extends Seeder
     {
         $csvFile = file(public_path('csv/packs-seed-data.csv'));
 
-        $curr = 0;
-        $max = 1000;
-
-        DB::transaction(function () use ($csvFile, $curr, $max) {
+        DB::transaction(function () use ($csvFile) {
             foreach ($csvFile as $line) {
-                if ($curr > $max) {
-                    break;
-                } else {
-                    $curr++;
-                }
-
-
                 $parsedLine = str_getcsv($line);
                 $parsed = [
                     'title' => str_replace('"', '', str_replace('"', '', $parsedLine[0])),
@@ -51,31 +41,29 @@ class RealPackSeeder extends Seeder
                     dump('NO ARTIST: ' . $parsed['artist'], $parsed);
                 }
 
-                if ($song) {
-                    // dump('SONG FOUND: ' . $song->title . ' --- ' . $song->artist->name);
-                } else {
+                if ($song === null) {
                     dump('NO SONG! ' . $parsed['title'] . ' --- ' . $parsed['artist'], $parsed);
                 }
 
                 if ($usPackExists === null) {
-                    // $pack = Pack::create([
-                    //     'slug' => $usSlug,
-                    //     'name' => ucwords($parsed['us_pack_name']),
-                    //     'steam_url' => null,
-                    //     'date' => Carbon::parse($parsed['us_pack_date']),
-                    //     'region' => 'US',
-                    // ]);
+                    $pack = Pack::create([
+                        'slug' => $usSlug,
+                        'name' => ucwords($parsed['us_pack_name']),
+                        'steam_url' => null,
+                        'date' => Carbon::parse($parsed['us_pack_date']),
+                        'region' => 'US',
+                    ]);
                 }
 
 
                 if ($euPackExists === null) {
-                    // $pack = Pack::create([
-                    //     'slug' => $euSlug,
-                    //     'name' => ucwords($parsed['eu_pack_name']),
-                    //     'steam_url' => null,
-                    //     'date' => Carbon::parse($parsed['eu_pack_date']),
-                    //     'region' => 'EU',
-                    // ]);
+                    $pack = Pack::create([
+                        'slug' => $euSlug,
+                        'name' => ucwords($parsed['eu_pack_name']),
+                        'steam_url' => null,
+                        'date' => Carbon::parse($parsed['eu_pack_date']),
+                        'region' => 'EU',
+                    ]);
                 }
             }
 
