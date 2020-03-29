@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     protected $hidden = ['artist_id', 'album_id', 'pack_id'];
-    protected $with = ['artist', 'album', 'pack', 'songArrangements'];
+    protected $with = ['artist', 'album', 'packs', 'songArrangements'];
     protected $appends = ['artist_name', 'album_name', 'pack_name', 'search_string', 'average_difficulty'];
 
     public function artist()
@@ -20,9 +20,9 @@ class Song extends Model
         return $this->belongsTo(Album::class);
     }
 
-    public function pack()
+    public function packs()
     {
-        return $this->belongsTo(Pack::class);
+        return $this->belongsToMany(Pack::class);
     }
 
     public function songArrangements()
@@ -32,7 +32,7 @@ class Song extends Model
 
     public function getSearchStringAttribute()
     {
-        $string = $this->title . ' ' . $this->artist_name . ' ' . $this->album_name . ' ' . $this->pack_name;
+        $string = $this->title . ' ' . $this->artist_name . ' ' . $this->album_name;
 
         return strtolower(preg_replace('/[^a-z0-9]+/i', ' ', $string));
     }
@@ -45,11 +45,6 @@ class Song extends Model
     public function getAlbumNameAttribute()
     {
         return $this->album->name;
-    }
-
-    public function getPackNameAttribute()
-    {
-        return $this->pack->name ?? '';
     }
 
     public function getAverageDifficultyAttribute()

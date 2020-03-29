@@ -3,7 +3,8 @@
     <div class="my-8">
         <h2 class="mt-8 font-bold text-blue-700 text-2xl">Filter Songs</h2>
         <p class="mb-4">You can search by artist name, album title, pack name etc.</p>
-        <input wire:model="query" type="text" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-2xl text-gray-700 leading-tight focus:outline-none focus:bg-gray-100 focus:border-blue-600">
+        <input wire:model="query" type="text"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-2xl text-gray-700 leading-tight focus:outline-none focus:bg-gray-100 focus:border-blue-600">
     </div>
 
     {{-- Loading Spinner when filtering the song table. --}}
@@ -29,6 +30,10 @@
                             Album
                         </th>
 
+                        <th class="songsmith-th hover:underline">
+                            Packs
+                        </th>
+
                         <th wire:click="sortBy('average_difficulty')" class="songsmith-th hover:underline">
                             Avg. Difficulty
                         </th>
@@ -50,6 +55,12 @@
 
                         <td class="songsmith-td">
                             {{ $song->album->name }}
+                        </td>
+
+                        <td class="songsmith-td">
+                            @foreach ($song->packs as $pack)
+                            {{ $pack->name }} @if (count($song->packs) > 1) ({{ $pack->region }}) @endif<br>
+                            @endforeach
                         </td>
 
                         <td class="songsmith-td">

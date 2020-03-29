@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::transaction(function () {
             $this->call(RealSongSeeder::class);
+            $this->call(RealPackSeeder::class);
 
             // $this->call(ArtistSeeder::class);
             // $this->call(PackSeeder::class);

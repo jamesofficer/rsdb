@@ -28,49 +28,92 @@ class RealPackSeeder extends Seeder
                     'eu_pack_date' => $parsedLine[7],
                 ];
 
-                $usSlug = Str::slug('US' . ' ' . $parsed['us_pack_name']);
-                $euSlug = Str::slug('EU' . ' ' . $parsed['eu_pack_name']);
-                $usPackExists = Pack::where('slug', $usSlug)->first();
-                $euPackExists = Pack::where('slug', $euSlug)->first();
-
                 $artist = Artist::where('name', 'ilike', $parsed['artist'])->first();
+                $song = Song::where('title', 'ilike', $parsed['title'])->where('artist_id', $artist->id)->first();
 
-                if ($artist) {
-                    $song = Song::where('title', 'ilike', $parsed['title'])->where('artist_id', $artist->id)->first();
-                } else {
-                    dump('NO ARTIST: ' . $parsed['artist'], $parsed);
-                }
-
-                if ($song === null) {
-                    dump('NO SONG! ' . $parsed['title'] . ' --- ' . $parsed['artist'], $parsed);
-                }
-
-                if ($usPackExists === null) {
-                    $pack = Pack::create([
-                        'slug' => $usSlug,
+                if ($parsed['us_pack_name']) {
+                    $usPack = Pack::firstOrCreate([
+                        'slug' => Str::slug('US' . ' ' . $parsed['us_pack_name']),
                         'name' => ucwords($parsed['us_pack_name']),
                         'steam_url' => null,
-                        'date' => Carbon::parse($parsed['us_pack_date']),
                         'region' => 'US',
                     ]);
-                }
 
-
-                if ($euPackExists === null) {
-                    $pack = Pack::create([
-                        'slug' => $euSlug,
-                        'name' => ucwords($parsed['eu_pack_name']),
-                        'steam_url' => null,
-                        'date' => Carbon::parse($parsed['eu_pack_date']),
-                        'region' => 'EU',
+                    DB::table('pack_song')->insert([
+                        'song_id' => $song->id,
+                        'pack_id' => $usPack->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
                     ]);
                 }
+
+                if ($parsed['eu_pack_name'] && $parsed['eu_pack_name'] !== $parsed['us_pack_name']) {
+                    $euPack = Pack::firstOrCreate([
+                        'slug' => Str::slug('EU' . ' ' . $parsed['eu_pack_name']),
+                        'name' => ucwords($parsed['eu_pack_name']),
+                        'steam_url' => null,
+                        'region' => 'EU',
+                    ]);
+
+                    DB::table('pack_song')->insert([
+                        'song_id' => $song->id,
+                        'pack_id' => $euPack->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+
+                // $usSlug = Str::slug('US' . ' ' . $parsed['us_pack_name']);
+                // $euSlug = Str::slug('EU' . ' ' . $parsed['eu_pack_name']);
+                // // $usPackExists = Pack::where('slug', $usSlug)->first();
+                // // $euPackExists = Pack::where('slug', $euSlug)->first();
+
+                // $artist = Artist::where('name', 'ilike', $parsed['artist'])->first();
+
+                // if ($artist) {
+                //     $song = Song::where('title', 'ilike', $parsed['title'])->where('artist_id', $artist->id)->first();
+                // } else {
+                //     dump('NO ARTIST: ' . $parsed['artist'], $parsed);
+                //     throw new Exception;
+                // }
+
+                // if ($song === null) {
+                //     dump('NO SONG! ' . $parsed['title'] . ' --- ' . $parsed['artist'], $parsed);
+                //     throw new Exception;
+                // }
+
+                // // Create the packs and pivot relationships.
+
+                // $usPack = Pack::firstOrCreate([
+                //     'slug' => $usSlug,
+                //     'name' => ucwords($parsed['us_pack_name']),
+                //     'steam_url' => null,
+                //     'date' => Carbon::parse($parsed['us_pack_date']),
+                //     'region' => 'US',
+                // ]);
+
+                // DB::table('pack_song')->insert([
+                //     'song_id' => $song->id,
+                //     'pack_id' => $usPack->id,
+                //     'created_at' => Carbon::now(),
+                //     'updated_at' => Carbon::now(),
+                // ]);
+
+                // $euPack = Pack::firstOrCreate([
+                //     'slug' => $euSlug,
+                //     'name' => ucwords($parsed['eu_pack_name']),
+                //     'steam_url' => null,
+                //     'date' => Carbon::parse($parsed['eu_pack_date']),
+                //     'region' => 'EU',
+                // ]);
+
+                // DB::table('pack_song')->insert([
+                //     'song_id' => $song->id,
+                //     'pack_id' => $euPack->id,
+                //     'created_at' => Carbon::now(),
+                //     'updated_at' => Carbon::now()
+                // ]);
             }
-
-            // ================================== //
-            // ======= NOW ADD THE SONGS ======== //
-            // ================================== //
-
         });
     }
 }
